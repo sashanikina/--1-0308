@@ -195,7 +195,7 @@ void DiskInfo() {
 
         //Конец расшифровка lpFileSystemFlags
 
-        cout << "Имя файловой системы: " << lpFileSystemNameBuffer << endl;
+        cout << "Имя файловой системы: " << (char *) lpFileSystemNameBuffer << endl;
     }
 
     //GetFreeDiskSpace
@@ -561,7 +561,7 @@ void Task2() {
     h1 = CreateFile(p1, GENERIC_READ, NULL, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING | FILE_FLAG_OVERLAPPED,
                     nullptr);
     h2 = CreateFile(p2, GENERIC_READ | GENERIC_WRITE, NULL, nullptr, CREATE_ALWAYS,
-                         FILE_FLAG_NO_BUFFERING | FILE_FLAG_OVERLAPPED, nullptr);
+                    FILE_FLAG_NO_BUFFERING | FILE_FLAG_OVERLAPPED, nullptr);
     fileSize = GetFileSize(h1, nullptr);
     finalFileSize = fileSize;
     pToBuf = new char[totalBlockSize * operations];
@@ -620,7 +620,7 @@ void Task2() {
     SetEndOfFile(h2);
     timeEnd = GetTickCount();
     if (GetLastError() == ERROR_SUCCESS ||
-            GetLastError() == ERROR_ALREADY_EXISTS)
+        GetLastError() == ERROR_ALREADY_EXISTS)
         printf("Файл успешно скопирован\n");
     else
         printf("Копирование файла завершилось с ошибкой: %lu\n", GetLastError());
